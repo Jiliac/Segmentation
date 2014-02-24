@@ -1,0 +1,2 @@
+INDEX VERSION 1.126+F:\projet java\diagnostic\testImage\.metadata\.plugins\org.eclipse.jdt.core
+3022799819.index
