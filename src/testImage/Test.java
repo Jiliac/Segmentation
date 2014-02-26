@@ -9,13 +9,13 @@ import java.util.*;
 import javax.imageio.ImageIO;
 
 public class Test {
-
+/*
 	public static void main(String[] args) {
 		BufferedImage img = null;//Cr¨¦ation d'une image BufferedImage
 		try {
 			//la m¨¦thode statique  read de la classe javax.imageio.ImageIO renvoie 
 			//une instance de la classe BufferedImage (qui ¨¦tend la classe abstraite Image).
-			img = ImageIO.read(new File("5.jpg"));
+			img = ImageIO.read(new File("1.jpg"));
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -53,19 +53,15 @@ public class Test {
 					img.setRGB(x, y, rgb); //remplir cette zone par une couleur homog¨¨ne 
 					
 				  }
-				if (diff>0.0001)
-				{	System.out.println(diff);	
-				
-				}
 			}
 		}
 		
-		    File outputfile = new File("55.jpg");  
+		    File outputfile = new File("1a.jpg");  
 	    try {
 			ImageIO.write(img, "jpg" ,outputfile);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}  
 	}
-
+*/
 }
