@@ -58,11 +58,17 @@ public class Ensemble {
 		for (Point point : premiereCollection)
 			this.collectionExistance(point); // rassemblement des categories
 
+		ArrayList<Collection> ensembleCopie = new ArrayList<Collection>();
+		for (Collection collec : ensemble) {
+			Point pivot = collec.get(0);
+			if (pivot.getGrIn() != pivot.getGrOut())
+				ensembleCopie.add(collec);
+		}
+		ensemble = ensembleCopie;
+
 		for (Collection myCollec : ensemble)
 			this.composantesConnexes(myCollec); // division des collections en
 												// composantes connexes
-		
-		// 	ATTENTION MARCHE PAS
 
 		/*
 		 * on enleve les collections de rayon trop grand et les collection
@@ -73,59 +79,59 @@ public class Ensemble {
 		for (int i = 0; i < size; i++) {
 			Collection collec = newEnsemble.get(i);
 			if (collec.getRayon() > width / 5 || collec.getRayon() > height / 5
-					|| collec.getEcartType() > collec.getRayon())
+					|| collec.getEcartType() > 3*collec.getRayon())
 				aSupprimer.add(collec);
 		}
 		for (Collection collec : aSupprimer)
 			newEnsemble.remove(collec);
+		for(Collection collec : newEnsemble)
+			System.out.println(collec);
+		System.out.println("fini");
 	}
 
 	/********* deuxieme etage de developpement *************/
 
 	private void composantesConnexes(Collection myCollec) {
 		/***************** analyse ***************/
-		
-		//IL FAUT INITIALISER
+
 		Collection pointPasses = new Collection();
 		int maxEtiquette = 0;
 		for (Point pointSetEtiquette : myCollec) {
-			for (Point pointReference : pointPasses) {
-				if (myCollec.isVoisin(pointSetEtiquette, pointReference)) {
-					//ATTENTION
-					// ca peut pas marcher: je compare meme pas les categorie
-					pointSetEtiquette
-							.setEtiquette(pointReference, maxEtiquette);
-				}
-				if (pointSetEtiquette.getEtiquette() == maxEtiquette)
-					maxEtiquette++;
-				pointPasses.add(pointSetEtiquette);
+			pointSetEtiquette.setEtiquette(maxEtiquette);
+			// les voisin, qui ont le meme groupe ont la meme etiquette
+			for (Point pointRef : pointPasses) {
+				if (myCollec.isVoisin(pointSetEtiquette, pointRef)
+						&& pointRef.equal(pointSetEtiquette))
+					pointSetEtiquette.setEtiquette(pointRef);
 			}
-			// MAX ETIQUETTE JAMAIS INCREMENTE
-			// je pense que isVoisin n'est jamais appele
+
+			if (pointSetEtiquette.getEtiquette() == maxEtiquette)
+				maxEtiquette++;
+			pointPasses.add(pointSetEtiquette);
 		}
 
 		/******** scinder les collections *******/
 
 		// initialise
 		Collection myCollecScinde[] = new Collection[maxEtiquette + 1];
-		for (Collection collec : myCollecScinde)
-			collec = new Collection();
+		for (int i = 0; i <= maxEtiquette; i++)
+			myCollecScinde[i] = new Collection();
 
 		// ajout
 		for (Point point : myCollec) {
 			myCollecScinde[point.getEtiquette()].add(point);
 		}
-		// ATTENTION ETIQUETAGE
 
 		// on ajoute le resultat de l'analyse
 		for (Collection collec : myCollecScinde)
-			newEnsemble.add(collec);
+			if (collec.size() > 5)
+				newEnsemble.add(collec);
 
 	}
 
 	private Collection collectionExistance(Point point) {
 		for (Collection myCollec : ensemble) {
-			if (myCollec.equal(point)){
+			if (myCollec.equal(point)) {
 				myCollec.add(point);
 				return myCollec;
 			}

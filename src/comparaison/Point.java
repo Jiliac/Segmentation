@@ -28,9 +28,11 @@ public class Point {
 
 	/****** outil de determination de la connexitee *********/
 
-	int etiquette = -1;
+	private int etiquette = -1;
 
-	public void setEtiquette(Point voisin, int maxEtiquette) {
+	public void setEtiquette(Point voisin) {
+		this.etiquette = voisin.getEtiquette();
+		/*
 		if (voisin != null) {
 			if (this.equal(voisin)) {
 				etiquette = voisin.getEtiquette();
@@ -40,6 +42,7 @@ public class Point {
 			etiquette = maxEtiquette;
 			return;
 		}
+		*/
 	}
 
 	public int getEtiquette() {

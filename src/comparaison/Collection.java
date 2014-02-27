@@ -66,7 +66,7 @@ public class Collection extends ArrayList<Point> {
 	public boolean isVoisin(Point moi, Point potentielVoisin) {
 		int ecartX = moi.getPosX() - potentielVoisin.getPosX();
 		int ecartY = moi.getPosY() - potentielVoisin.getPosY();
-		if (Math.abs(ecartX) < 5 || Math.abs(ecartY) < 5)
+		if (Math.abs(ecartX) < 2 && Math.abs(ecartY) < 2)
 			return true;
 		else
 			return false;
@@ -80,5 +80,17 @@ public class Collection extends ArrayList<Point> {
 
 	public int getGrOut() {
 		return this.get(0).getGrOut();
+	}
+
+	public String toString() {
+		String str = super.toString();
+		str += "\nje suis une collection de centre ("
+				+ this.getCentre().getPosX() + "," + this.getCentre().getPosY()
+				+ ")";
+		str += "\nde rayon " + this.getRayon() + " et d'ecartType "
+				+ this.getEcartType();
+		str += "\net j'ai " + this.size() + " elements";
+		str += "\n";
+		return str;
 	}
 }
