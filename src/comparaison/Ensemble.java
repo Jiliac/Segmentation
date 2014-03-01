@@ -79,12 +79,12 @@ public class Ensemble {
 		for (int i = 0; i < size; i++) {
 			Collection collec = newEnsemble.get(i);
 			if (collec.getRayon() > width / 5 || collec.getRayon() > height / 5
-					|| collec.getEcartType() > 3*collec.getRayon())
+					|| collec.size() < 10 /* || collec.getEcartType() > 3*collec.getRayon() */)
 				aSupprimer.add(collec);
 		}
 		for (Collection collec : aSupprimer)
 			newEnsemble.remove(collec);
-		for(Collection collec : newEnsemble)
+		for (Collection collec : newEnsemble)
 			System.out.println(collec);
 		System.out.println("fini");
 	}
@@ -141,6 +141,10 @@ public class Ensemble {
 		newCollec.add(point);
 		ensemble.add(newCollec);
 		return newCollec;
+	}
+	
+	public ArrayList<Collection> getCollec(){
+		return this.newEnsemble;
 	}
 
 }

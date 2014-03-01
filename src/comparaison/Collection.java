@@ -66,7 +66,7 @@ public class Collection extends ArrayList<Point> {
 	public boolean isVoisin(Point moi, Point potentielVoisin) {
 		int ecartX = moi.getPosX() - potentielVoisin.getPosX();
 		int ecartY = moi.getPosY() - potentielVoisin.getPosY();
-		if (Math.abs(ecartX) < 2 && Math.abs(ecartY) < 2)
+		if (Math.abs(ecartX) < 5 && Math.abs(ecartY) < 5)
 			return true;
 		else
 			return false;

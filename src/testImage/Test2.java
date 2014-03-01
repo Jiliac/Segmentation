@@ -15,7 +15,7 @@ import baseDApprentissage.*;
 public class Test2 {
 
 	public static void main(String[] args) {
-		DiagMainClass dmc = new DiagMainClass("1.jpg","1d.jpg");
+		DiagMainClass dmc = new DiagMainClass("test9.jpg","test9c.jpg");
 	}
 
 }

@@ -1,4 +1,5 @@
 package testImage;
+
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-
+import comparaison.Collection;
 import comparaison.Ensemble;
 import comparaison.Point;
 
@@ -58,6 +59,9 @@ public class DiagMainClass {
 		// analyse
 		Ensemble ensembleAAnlyser = new Ensemble(img, sortieATrier);
 
+		/******** affichage des collection */
+		this.afficherCollec(ensembleAAnlyser, img);
+		
 		// ecriture en sortie
 
 		File outputfile = new File(nomFichierSortie);
@@ -67,5 +71,29 @@ public class DiagMainClass {
 			e.printStackTrace();
 		}
 
+	}
+
+	public void afficherCollec(Ensemble ensembleAAnlyser, BufferedImage img) {
+		for (int x = 0; x < img.getWidth(); x++) {
+			for (int y = 0; y < img.getHeight(); y++) {
+				img.setRGB(x, y, 0);
+			}
+		}
+		ArrayList<Collection> ensemble = ensembleAAnlyser.getCollec();
+		for (Collection collec : ensemble) {
+			this.afficher(collec, img);
+		}
+	}
+
+	public void afficher(Collection collec, BufferedImage img) {
+		Point centre = collec.getCentre();
+		double rayon = collec.getRayon();
+		for (int x = 0; x < img.getWidth(); x++) {
+			for (int y = 0; y < img.getHeight(); y++) {
+				Point p = new Point(x, y);
+				if (collec.distance(p, centre) < rayon)
+					img.setRGB(x, y, new Color(255, 255, 255).getRGB());
+			}
+		}
 	}
 }

@@ -7,16 +7,19 @@ public class Point {
 	private int grIn, grOut;
 
 	public Point(int x, int y, int grIn, int grOut) {
-		this.x = x;
-		this.y = y;
+		this(x, y);
 		this.grIn = grIn;
 		this.grOut = grOut;
 	}
 
 	public Point(int x, int y, Pixel pixel) {
+		this(x, y);
+		this.grOut = pixel.getnumGroupe();
+	}
+
+	public Point(int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.grOut = pixel.getnumGroupe();
 	}
 
 	public boolean equal(Point p) {
@@ -33,16 +36,10 @@ public class Point {
 	public void setEtiquette(Point voisin) {
 		this.etiquette = voisin.getEtiquette();
 		/*
-		if (voisin != null) {
-			if (this.equal(voisin)) {
-				etiquette = voisin.getEtiquette();
-				return;
-			}
-		} else {
-			etiquette = maxEtiquette;
-			return;
-		}
-		*/
+		 * if (voisin != null) { if (this.equal(voisin)) { etiquette =
+		 * voisin.getEtiquette(); return; } } else { etiquette = maxEtiquette;
+		 * return; }
+		 */
 	}
 
 	public int getEtiquette() {
