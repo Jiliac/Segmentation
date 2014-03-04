@@ -3,6 +3,8 @@ package comparaison;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import comparaison.equivalence.ListeEqui;
+
 public class Ensemble {
 
 	/*********** constructeur *************/
@@ -108,12 +110,16 @@ public class Ensemble {
 	/********* deuxieme etage de developpement *************/
 
 	private void composantesConnexes2(Collection myCollec) {
+		// on initialise la objet necessaire a la methode
+		ListeEqui listeEqui = new ListeEqui();
 		int maxEtiquette = 0;
 		ArrayList<Point> pastPts = new ArrayList<Point>();
 
+		// boucle d'analyse principale
 		for (Point ptSetEtiquette : myCollec) {
+			// on determine les voisins parmis les points passés et on set
+			// l'etiquette
 			ptSetEtiquette.setEtiquette(maxEtiquette);
-
 			ArrayList<Point> voisins = new ArrayList<Point>();
 			for (Point past : pastPts) {
 				if (myCollec.isVoisin(ptSetEtiquette, past)) {
@@ -121,22 +127,45 @@ public class Ensemble {
 				}
 			}
 
+			// on set les classes d'equivalence
 			if (!voisins.isEmpty()) {
 				ptSetEtiquette.setEtiquette(voisins.get(0).getEtiquette());
+				ArrayList<Integer> aAjouter = new ArrayList<Integer>();
+				for (Point voisin : voisins)
+					aAjouter.add(voisin.getEtiquette());
+				listeEqui.add(aAjouter);
+				
+				//debug
+				if(listeEqui.size()==2)
+					System.out.println("debug");
+				
+				System.out.print("");
 			}
+
+			// fin de boucle
 			if (ptSetEtiquette.getEtiquette() == maxEtiquette)
 				maxEtiquette++;
 			pastPts.add(ptSetEtiquette);
 		}
+		
+		// correction d'un bug dans listeEqui
+		ArrayList<Integer> dernierAjout = new ArrayList<Integer>();
+		dernierAjout.add(0);
+		listeEqui.add(dernierAjout);
+		
+		// on rassemble les points selon leur classe d'equivalence
+		for (Point point : myCollec)
+			listeEqui.setMinEtiquette(point);
+		maxEtiquette = listeEqui.getMaxDesMin();
 
 		// ici c'est simplement la copie du resultat de l'etiquetage dans
 		// newEnsemble
-		Collection newCollec[] = new Collection[maxEtiquette];
-		for (int i = 0; i < maxEtiquette; i++)
+		Collection newCollec[] = new Collection[maxEtiquette + 1];
+		for (int i = 0; i <= maxEtiquette; i++)
 			newCollec[i] = new Collection();
 		for (Point ptSetEtiquette : myCollec)
 			newCollec[ptSetEtiquette.getEtiquette()].add(ptSetEtiquette);
-		for (int i = 0; i < maxEtiquette; i++)
+		for (int i = 0; i <= maxEtiquette; i++)
 			newEnsemble.add(newCollec[i]);
 	}
 

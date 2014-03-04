@@ -2,7 +2,44 @@ package comparaison.equivalence;
 
 import java.util.ArrayList;
 
+import comparaison.Point;
+
 public class ListeEqui extends ArrayList<ArrayList<Integer>> {
+
+	/************************ EXPLOITATION DES CLASSES D'EQUIVALENCE **********************/
+	private ArrayList<Integer> listeDesMin = new ArrayList<Integer>();
+	
+	public void setMinEtiquette(Point pt) {
+		// met la valeur d'etiquette minimum de la classe d'equivalence
+		/*
+		 * 1) on recupere le numero de la classe d'equivalence 2) on recupere
+		 * l'etiquette minimum dans cette classe 3) on remplace l'etiquette
+		 */
+
+		int etiquette = pt.getEtiquette();
+		int num = this.getNumeroListe(etiquette);
+		ArrayList<Integer> listeToGetMin = this.get(num);
+		int minEtiquette = Integer.MAX_VALUE;
+		for (int i : listeToGetMin)
+			if (i < minEtiquette && i != -1)
+				minEtiquette = i;
+		pt.setEtiquette(minEtiquette);
+
+		// on prepare la liste pour la methode suivante "getMaxDesMin"
+		if (!this.isIn(minEtiquette, listeDesMin))
+			listeDesMin.add(minEtiquette);
+	}
+
+	public int getMaxDesMin() {
+		int retour = Integer.MIN_VALUE;
+		for (int i : listeDesMin)
+			if (i > retour)
+				retour = i;
+		return retour;
+	}
+
+	/************************ MISE EN PLACE DES EQUIVALENCES **********************/
+
 	/*
 	 * cette classe doit prendre en entre une liste de nombre la comparer avec
 	 * les listes existentes ajouter le nombre ET/OU fusionner des listes
@@ -43,7 +80,7 @@ public class ListeEqui extends ArrayList<ArrayList<Integer>> {
 			allInListe = true;
 			onlyOneInListe = false;
 		} else {
-			System.out.println("PROBLEME");
+			System.out.println("PROBLEME1");
 			existInListe = true;
 			allInListe = true;
 			onlyOneInListe = true;
@@ -75,7 +112,8 @@ public class ListeEqui extends ArrayList<ArrayList<Integer>> {
 			}
 			while (howManyInListe != 1) {
 				int max = this.getMax(numListe);
-				this.remove(max);
+				if (max != min)
+					this.remove(max);
 				howManyInListe--;
 			}
 			return true;
@@ -108,7 +146,7 @@ public class ListeEqui extends ArrayList<ArrayList<Integer>> {
 			}
 			return true;
 		} else {
-			System.out.println("PROBLEME");
+			System.out.println("PROBLEME2");
 			return false;
 		}
 	}
@@ -144,8 +182,7 @@ public class ListeEqui extends ArrayList<ArrayList<Integer>> {
 		}
 		return retour;
 	}
-	
-	
+
 	public ArrayList<Integer> traiter(ArrayList<Integer> aAjouter) {
 		ArrayList<Integer> copie = new ArrayList<Integer>();
 		for (int i : aAjouter)
@@ -179,5 +216,19 @@ public class ListeEqui extends ArrayList<ArrayList<Integer>> {
 			if (retour == numListe[i])
 				numListe[i] = -1;
 		return retour;
+	}
+
+	public String toString() {
+		String str = "";
+		int i = 0;
+		for (ArrayList<Integer> ali : this) {
+			str += "Classe " + i + " contient: ";
+			for (Integer integer : ali)
+				str += integer + " ,";
+			i++;
+			str += "\n";
+		}
+
+		return str;
 	}
 }
