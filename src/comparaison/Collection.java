@@ -65,7 +65,7 @@ public class Collection extends ArrayList<Point> {
 	}
 
 	public boolean isVoisin(Point moi, Point potentielVoisin) {
-		if (this.distance(moi, potentielVoisin) < .5)
+		if (this.distance(moi, potentielVoisin) < 2)
 			return true;
 		else
 			return false;

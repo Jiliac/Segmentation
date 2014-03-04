@@ -32,10 +32,19 @@ public class Ensemble {
 		// donne valeur a grOut de tous les points
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
-				if (x != 0 && y != 0){
-					int myGr = premiereEntree[x][y].getGrIn();
-				}
-				else if (x != 0)
+				if (x != 0 && y != 0) {
+					int myGr = premiereEntree[x][y].getGrOut();
+					if (premiereEntree[x - 1][y].getGrOut() != myGr)
+						premiereEntree[x][y].setGrIn(premiereEntree[x - 1][y]
+								.getGrOut());
+					else if (premiereEntree[x][y - 1].getGrOut() != myGr)
+						premiereEntree[x][y].setGrIn(premiereEntree[x][y - 1]
+								.getGrOut());
+					else
+						premiereEntree[x][y]
+								.setGrIn(premiereEntree[x - 1][y - 1]
+										.getGrOut());
+				} else if (x != 0)
 					premiereEntree[x][y].setGrIn(premiereEntree[x - 1][y]
 							.getGrOut());
 				else if (y != 0)
