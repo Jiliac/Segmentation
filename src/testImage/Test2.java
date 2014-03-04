@@ -1,21 +1,38 @@
 package testImage;
 
-import java.awt.Color;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
+import comparaison.equivalence.ListeEqui;
 
-import comparaison.Collection;
-import comparaison.Ensemble;
-import comparaison.Point;
-import baseDApprentissage.*;
+
 
 public class Test2 {
 
 	public static void main(String[] args) {
-		DiagMainClass dmc = new DiagMainClass("10.jpg", "10b.jpg");
+		//DiagMainClass dmc = new DiagMainClass("10.jpg", "10b.jpg");
+		ListeEqui le = new ListeEqui();
+		
+		ArrayList<Integer> aAjouter = new ArrayList<Integer>();
+		aAjouter.add(1);
+		aAjouter.add(36);
+		le.add(aAjouter);
+		
+		aAjouter = new ArrayList<Integer>();
+		aAjouter.add(1);
+		aAjouter.add(25);
+		le.add(aAjouter);
+		
+		aAjouter = new ArrayList<Integer>();
+		aAjouter.add(2);
+		aAjouter.add(3);
+		le.add(aAjouter);
+		
+		aAjouter = new ArrayList<Integer>();
+		aAjouter.add(1);
+		aAjouter.add(3);
+		aAjouter.add(3);
+		le.add(aAjouter);
+		
+		System.out.println("fini");
 	}
 }

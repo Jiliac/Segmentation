@@ -121,14 +121,16 @@ public class Ensemble {
 				}
 			}
 
-			if (!voisins.isEmpty())
+			if (!voisins.isEmpty()) {
 				ptSetEtiquette.setEtiquette(voisins.get(0).getEtiquette());
-
+			}
 			if (ptSetEtiquette.getEtiquette() == maxEtiquette)
 				maxEtiquette++;
 			pastPts.add(ptSetEtiquette);
 		}
 
+		// ici c'est simplement la copie du resultat de l'etiquetage dans
+		// newEnsemble
 		Collection newCollec[] = new Collection[maxEtiquette];
 		for (int i = 0; i < maxEtiquette; i++)
 			newCollec[i] = new Collection();
