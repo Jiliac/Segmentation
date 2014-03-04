@@ -25,6 +25,8 @@ public class Point {
 	public boolean equal(Point p) {
 		if (this.grIn == p.getGrIn() && this.grOut == p.getGrOut())
 			return true;
+		else if(this.grIn == p.getGrOut() && this.grOut == p.getGrIn())
+			return true;
 		else
 			return false;
 	}
@@ -35,11 +37,6 @@ public class Point {
 
 	public void setEtiquette(Point voisin) {
 		this.etiquette = voisin.getEtiquette();
-		/*
-		 * if (voisin != null) { if (this.equal(voisin)) { etiquette =
-		 * voisin.getEtiquette(); return; } } else { etiquette = maxEtiquette;
-		 * return; }
-		 */
 	}
 
 	public int getEtiquette() {

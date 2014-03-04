@@ -67,8 +67,8 @@ public class Ensemble {
 		ensemble = ensembleCopie;
 
 		for (Collection myCollec : ensemble)
-			this.composantesConnexes(myCollec); // division des collections en
-												// composantes connexes
+			this.composantesConnexes2(myCollec); // division des collections en
+													// composantes connexes
 
 		/*
 		 * on enleve les collections de rayon trop grand et les collection
@@ -79,17 +79,52 @@ public class Ensemble {
 		for (int i = 0; i < size; i++) {
 			Collection collec = newEnsemble.get(i);
 			if (collec.getRayon() > width / 5 || collec.getRayon() > height / 5
-					|| collec.size() < 10 /* || collec.getEcartType() > 3*collec.getRayon() */)
+					|| collec.size() < 10 /*
+										 * || collec.getEcartType() >
+										 * 3*collec.getRayon()
+										 */)
 				aSupprimer.add(collec);
 		}
-		for (Collection collec : aSupprimer)
-			newEnsemble.remove(collec);
+		/*
+		 * for (Collection collec : aSupprimer) newEnsemble.remove(collec);
+		 */
 		for (Collection collec : newEnsemble)
 			System.out.println(collec);
 		System.out.println("fini");
 	}
 
 	/********* deuxieme etage de developpement *************/
+
+	private void composantesConnexes2(Collection myCollec) {
+		int maxEtiquette = 0;
+		ArrayList<Point> pastPts = new ArrayList<Point>();
+
+		for (Point ptSetEtiquette : myCollec) {
+			ptSetEtiquette.setEtiquette(maxEtiquette);
+
+			ArrayList<Point> voisins = new ArrayList<Point>();
+			for (Point past : pastPts) {
+				if (myCollec.isVoisin(ptSetEtiquette, past)) {
+					voisins.add(past);
+				}
+			}
+
+			if (!voisins.isEmpty())
+				ptSetEtiquette.setEtiquette(voisins.get(0).getEtiquette());
+
+			if (ptSetEtiquette.getEtiquette() == maxEtiquette)
+				maxEtiquette++;
+			pastPts.add(ptSetEtiquette);
+		}
+
+		Collection newCollec[] = new Collection[maxEtiquette];
+		for (int i = 0; i < maxEtiquette; i++)
+			newCollec[i] = new Collection();
+		for (Point ptSetEtiquette : myCollec)
+			newCollec[ptSetEtiquette.getEtiquette()].add(ptSetEtiquette);
+		for (int i = 0; i < maxEtiquette; i++)
+			newEnsemble.add(newCollec[i]);
+	}
 
 	private void composantesConnexes(Collection myCollec) {
 		/***************** analyse ***************/
@@ -142,8 +177,8 @@ public class Ensemble {
 		ensemble.add(newCollec);
 		return newCollec;
 	}
-	
-	public ArrayList<Collection> getCollec(){
+
+	public ArrayList<Collection> getCollec() {
 		return this.newEnsemble;
 	}
 

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import comparaison.Collection;
 import comparaison.Ensemble;
 import comparaison.Point;
 import baseDApprentissage.*;
@@ -15,7 +16,6 @@ import baseDApprentissage.*;
 public class Test2 {
 
 	public static void main(String[] args) {
-		DiagMainClass dmc = new DiagMainClass("test9.jpg","test9c.jpg");
+		DiagMainClass dmc = new DiagMainClass("10.jpg", "10b.jpg");
 	}
-
 }

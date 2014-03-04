@@ -88,6 +88,11 @@ public class DiagMainClass {
 	public void afficher(Collection collec, BufferedImage img) {
 		Point centre = collec.getCentre();
 		double rayon = collec.getRayon();
+		
+		//debuggage
+		if(rayon == 0)
+			rayon = 1;
+		
 		for (int x = 0; x < img.getWidth(); x++) {
 			for (int y = 0; y < img.getHeight(); y++) {
 				Point p = new Point(x, y);

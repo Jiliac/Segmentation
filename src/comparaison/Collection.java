@@ -6,13 +6,13 @@ public class Collection extends ArrayList<Point> {
 
 	/*********** analyse d'une collection *************/
 	public double getEcartType() {
-		int sommeCarreRayon = 0;
+		double sommeCarreRayon = 0;
 		Point centre = this.getCentre();
 		for (Point point : this)
 			sommeCarreRayon += this.distance(point, centre)
 					* this.distance(point, centre);
 		int size = this.size();
-		int carreRayon = sommeCarreRayon / size;
+		double carreRayon = sommeCarreRayon / size;
 
 		return Math.sqrt(carreRayon - this.getRayon() * this.getRayon());
 	}
@@ -24,12 +24,12 @@ public class Collection extends ArrayList<Point> {
 			sommeY += point.getPosY();
 		}
 		int size = this.size();
-		return new Point((int) sommeX / size, (int) sommeY / size,
+		return new Point((int) (sommeX / size), (int) (sommeY / size),
 				this.getGrIn(), this.getGrOut());
 	}
 
 	public double getRayon() {
-		int sommeRayon = 0;
+		double sommeRayon = 0;
 		Point centre = this.getCentre();
 		for (Point point : this)
 			sommeRayon += this.distance(point, centre);
@@ -38,9 +38,10 @@ public class Collection extends ArrayList<Point> {
 	}
 
 	public double distance(Point p1, Point p2) {
-		return Math.sqrt((p1.getPosX() - p2.getPosX())
+		double retour = Math.sqrt((p1.getPosX() - p2.getPosX())
 				* (p1.getPosX() - p2.getPosX()) + (p1.getPosY() - p2.getPosY())
 				* (p1.getPosY() - p2.getPosY()));
+		return retour;
 	}
 
 	/************ traitement des collections **********/
@@ -64,9 +65,7 @@ public class Collection extends ArrayList<Point> {
 	}
 
 	public boolean isVoisin(Point moi, Point potentielVoisin) {
-		int ecartX = moi.getPosX() - potentielVoisin.getPosX();
-		int ecartY = moi.getPosY() - potentielVoisin.getPosY();
-		if (Math.abs(ecartX) < 5 && Math.abs(ecartY) < 5)
+		if (this.distance(moi, potentielVoisin) < .5)
 			return true;
 		else
 			return false;
@@ -87,6 +86,8 @@ public class Collection extends ArrayList<Point> {
 		str += "\nje suis une collection de centre ("
 				+ this.getCentre().getPosX() + "," + this.getCentre().getPosY()
 				+ ")";
+		Point p = this.get(0);
+		str += "\ngrIn = " + p.getGrIn() + " et grOut = " + p.getGrOut();
 		str += "\nde rayon " + this.getRayon() + " et d'ecartType "
 				+ this.getEcartType();
 		str += "\net j'ai " + this.size() + " elements";
