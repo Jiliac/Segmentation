@@ -51,16 +51,18 @@ public class DiagMainClass {
 					img.setRGB(x, y, rgb);
 				}
 
-				sortieATrier[x][y] = new Point(x, y, pixel); // preparation de
-																// l'analyse
+				// preparation de l'analyse
+				sortieATrier[x][y] = new Point(x, y, pixel);
 			}
 		}
 
 		// analyse
 		Ensemble ensembleAAnlyser = new Ensemble(img, sortieATrier);
 
-		/******** affichage des collection */
-		this.afficherCollec(ensembleAAnlyser, img);
+		if (Global.afficherCercle) {
+			/******** affichage des collection */
+			this.afficherCollec(ensembleAAnlyser, img);
+		}
 		
 		// ecriture en sortie
 
@@ -88,11 +90,11 @@ public class DiagMainClass {
 	public void afficher(Collection collec, BufferedImage img) {
 		Point centre = collec.getCentre();
 		double rayon = collec.getRayon();
-		
-		//debuggage
-		if(rayon == 0)
+
+		// debuggage
+		if (rayon == 0)
 			rayon = 1;
-		
+
 		for (int x = 0; x < img.getWidth(); x++) {
 			for (int y = 0; y < img.getHeight(); y++) {
 				Point p = new Point(x, y);

@@ -3,6 +3,8 @@ package comparaison;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import testImage.Global;
+
 import comparaison.equivalence.ListeEqui;
 
 public class Ensemble {
@@ -31,7 +33,7 @@ public class Ensemble {
 	private ArrayList<Collection> newEnsemble = new ArrayList<Collection>();
 
 	public void mainAlgo() {
-		// donne valeur a grOut de tous les points
+		// donne valeur a grIn de tous les points
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
 				if (x != 0 && y != 0) {
@@ -88,19 +90,32 @@ public class Ensemble {
 		 * on enleve les collections de rayon trop grand et les collection
 		 * d'ecart type trop grand
 		 */
-		ArrayList<Collection> aSupprimer = new ArrayList<Collection>();
-		int size = newEnsemble.size();
-		for (int i = 0; i < size; i++) {
-			Collection collec = newEnsemble.get(i);
-			if (collec.size() < 20 || collec.getRayon() > width / 5
-					|| collec.getRayon() > height / 5
-					|| collec.getEcartType() > 2)
-				aSupprimer.add(collec);
+		if (Global.supprimer) {
+
+			ArrayList<Collection> aSupprimer = new ArrayList<Collection>();
+			int size = newEnsemble.size();
+			for (int i = 0; i < size; i++) {
+				Collection collec = newEnsemble.get(i);
+				if (collec.size() < 20 || collec.getRayon() > width / 5
+						|| collec.getRayon() > height / 5
+						|| collec.getEcartType() > 2)
+					aSupprimer.add(collec);
+			}
+
+			for (Collection collec : aSupprimer)
+				newEnsemble.remove(collec);
 		}
 
-		for (Collection collec : aSupprimer)
-			newEnsemble.remove(collec);
+		if (Global.compterZones) {
+			int compteur = 0;
+			for (Collection collec : newEnsemble)
+				if (collec.get(0).getGrOut() == Global.intervalleACompter
+						.getGroupe())
+					compteur++;
+			System.out.println("Il y a "+compteur+" zone(s) de cet intervalle");
+		}
 
+		// on imprime en console les collections selectionnees
 		for (Collection collec : newEnsemble)
 			if (collec.size() != 0)
 				System.out.println(collec);
@@ -117,7 +132,7 @@ public class Ensemble {
 
 		// boucle d'analyse principale
 		for (Point ptSetEtiquette : myCollec) {
-			// on determine les voisins parmis les points passés et on set
+			// on determine les voisins parmis les points passï¿½s et on set
 			// l'etiquette
 			ptSetEtiquette.setEtiquette(maxEtiquette);
 			ArrayList<Point> voisins = new ArrayList<Point>();

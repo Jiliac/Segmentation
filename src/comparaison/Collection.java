@@ -2,6 +2,8 @@ package comparaison;
 
 import java.util.ArrayList;
 
+import testImage.Global;
+
 public class Collection extends ArrayList<Point> {
 
 	/*********** analyse d'une collection *************/
@@ -65,7 +67,7 @@ public class Collection extends ArrayList<Point> {
 	}
 
 	public boolean isVoisin(Point moi, Point potentielVoisin) {
-		if (this.distance(moi, potentielVoisin) < 2)
+		if (this.distance(moi, potentielVoisin) < Global.isVoisin)
 			return true;
 		else
 			return false;
