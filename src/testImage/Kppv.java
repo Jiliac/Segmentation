@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import baseDApprentissage.*;
 
 public class Kppv {
-	private ArrayList<Pixel> baseDApprentissage = new ConicBase();
+	private ArrayList<Pixel> baseDApprentissage = new BrightnessBase();
 	private int k = 1;
 
 	public void kppv(Pixel p) {

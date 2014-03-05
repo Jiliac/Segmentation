@@ -92,9 +92,9 @@ public class Ensemble {
 		int size = newEnsemble.size();
 		for (int i = 0; i < size; i++) {
 			Collection collec = newEnsemble.get(i);
-			if (collec.size() < 10 /*|| collec.getRayon() > width / 5
+			if (collec.size() < 20 || collec.getRayon() > width / 5
 					|| collec.getRayon() > height / 5
-					|| collec.getEcartType() > 1.5*/)
+					|| collec.getEcartType() > 2)
 				aSupprimer.add(collec);
 		}
 
@@ -102,7 +102,8 @@ public class Ensemble {
 			newEnsemble.remove(collec);
 
 		for (Collection collec : newEnsemble)
-			System.out.println(collec);
+			if (collec.size() != 0)
+				System.out.println(collec);
 		System.out.println("fini");
 	}
 
