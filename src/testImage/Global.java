@@ -16,5 +16,6 @@ public class Global {
 	public final static boolean compterZones = false;
 	// cette variable pourrait etre egale à l'inverse de supprimer, non?
 	
-	public final static Intervalle intervalleACompter = new Intervalle(0, 1);
+	static Intervalle inter = new Intervalle(0, 1);
+	public final static Intervalle intervalleACompter = inter;
 }

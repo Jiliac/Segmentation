@@ -109,8 +109,7 @@ public class Ensemble {
 		if (Global.compterZones) {
 			int compteur = 0;
 			for (Collection collec : newEnsemble)
-				if (collec.get(0).getGrOut() == Global.intervalleACompter
-						.getGroupe())
+				if (/*A DEBUGGER*/)
 					compteur++;
 			System.out.println("Il y a "+compteur+" zone(s) de cet intervalle");
 		}

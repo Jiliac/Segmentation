@@ -30,7 +30,7 @@ public class DiagHydra {
 			e.printStackTrace();
 		}
 
-		MethodeSeuil analyse = new MethodeSeuil();
+		MethodeSeuil analyse = new MethodeSeuil(new ListeIntervalleTest());
 
 		Point sortieATrier[][] = new Point[img.getWidth()][img.getHeight()];
 

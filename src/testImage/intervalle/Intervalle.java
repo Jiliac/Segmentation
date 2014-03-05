@@ -27,7 +27,7 @@ public class Intervalle {
 	public int getGroupe() {
 		return groupe;
 	}
-/*	public void setGroupe(int groupe) {
+	public void setGroupe(int groupe) {
 		this.groupe = groupe;
-	}*/	
+	}	
 }
