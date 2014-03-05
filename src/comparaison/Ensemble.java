@@ -92,16 +92,15 @@ public class Ensemble {
 		int size = newEnsemble.size();
 		for (int i = 0; i < size; i++) {
 			Collection collec = newEnsemble.get(i);
-			if (collec.getRayon() > width / 5 || collec.getRayon() > height / 5
-					|| collec.size() < 10 /*
-										 * || collec.getEcartType() >
-										 * 3*collec.getRayon()
-										 */)
+			if (collec.size() < 10 /*|| collec.getRayon() > width / 5
+					|| collec.getRayon() > height / 5
+					|| collec.getEcartType() > 1.5*/)
 				aSupprimer.add(collec);
 		}
-		/*
-		 * for (Collection collec : aSupprimer) newEnsemble.remove(collec);
-		 */
+
+		for (Collection collec : aSupprimer)
+			newEnsemble.remove(collec);
+
 		for (Collection collec : newEnsemble)
 			System.out.println(collec);
 		System.out.println("fini");
@@ -134,25 +133,24 @@ public class Ensemble {
 				for (Point voisin : voisins)
 					aAjouter.add(voisin.getEtiquette());
 				listeEqui.add(aAjouter);
-				
-				//debug
-				if(listeEqui.size()==2)
+
+				// debug
+				if (listeEqui.size() == 2)
 					System.out.println("debug");
-				
+
 				System.out.print("");
 			}
 
 			// fin de boucle
-			if (ptSetEtiquette.getEtiquette() == maxEtiquette)
+			if (ptSetEtiquette.getEtiquette() == maxEtiquette) {
+				ArrayList<Integer> aAjouter = new ArrayList<Integer>();
+				aAjouter.add(maxEtiquette);
+				listeEqui.add(aAjouter);
 				maxEtiquette++;
+			}
 			pastPts.add(ptSetEtiquette);
 		}
-		
-		// correction d'un bug dans listeEqui
-		ArrayList<Integer> dernierAjout = new ArrayList<Integer>();
-		dernierAjout.add(0);
-		listeEqui.add(dernierAjout);
-		
+
 		// on rassemble les points selon leur classe d'equivalence
 		for (Point point : myCollec)
 			listeEqui.setMinEtiquette(point);

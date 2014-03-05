@@ -18,14 +18,14 @@ public class Collection extends ArrayList<Point> {
 	}
 
 	public Point getCentre() {
-		int sommeX = 0, sommeY = 0;
-		for (Point point : this) {
-			sommeX += point.getPosX();
-			sommeY += point.getPosY();
-		}
-		int size = this.size();
-		return new Point((int) (sommeX / size), (int) (sommeY / size),
-				this.getGrIn(), this.getGrOut());
+			int sommeX = 0, sommeY = 0;
+			for (Point point : this) {
+				sommeX += point.getPosX();
+				sommeY += point.getPosY();
+			}
+			int size = this.size();
+			return new Point((int) (sommeX / size), (int) (sommeY / size),
+					this.getGrIn(), this.getGrOut());
 	}
 
 	public double getRayon() {

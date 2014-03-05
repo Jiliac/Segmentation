@@ -8,7 +8,7 @@ public class ListeEqui extends ArrayList<ArrayList<Integer>> {
 
 	/************************ EXPLOITATION DES CLASSES D'EQUIVALENCE **********************/
 	private ArrayList<Integer> listeDesMin = new ArrayList<Integer>();
-	
+
 	public void setMinEtiquette(Point pt) {
 		// met la valeur d'etiquette minimum de la classe d'equivalence
 		/*
@@ -18,6 +18,11 @@ public class ListeEqui extends ArrayList<ArrayList<Integer>> {
 
 		int etiquette = pt.getEtiquette();
 		int num = this.getNumeroListe(etiquette);
+		
+		//debug
+		if(num==-1)
+			System.out.println("debug2");
+		
 		ArrayList<Integer> listeToGetMin = this.get(num);
 		int minEtiquette = Integer.MAX_VALUE;
 		for (int i : listeToGetMin)
@@ -112,7 +117,7 @@ public class ListeEqui extends ArrayList<ArrayList<Integer>> {
 			}
 			while (howManyInListe != 1) {
 				int max = this.getMax(numListe);
-				if (max != min)
+				if (max != min && max != Integer.MIN_VALUE)
 					this.remove(max);
 				howManyInListe--;
 			}
@@ -141,7 +146,8 @@ public class ListeEqui extends ArrayList<ArrayList<Integer>> {
 			// et on supprime les listes que l'on a fusionner
 			while (howManyInListe != 1) {
 				int max = this.getMax(numListe);
-				this.remove(max);
+				if (max != min && max != Integer.MIN_VALUE)
+					this.remove(max);
 				howManyInListe--;
 			}
 			return true;
@@ -210,7 +216,7 @@ public class ListeEqui extends ArrayList<ArrayList<Integer>> {
 	public int getMax(int[] numListe) {
 		int retour = Integer.MIN_VALUE;
 		for (int i : numListe)
-			if (i > retour)
+			if (i > retour && i != -1)
 				retour = i;
 		for (int i = 0; i < numListe.length; i++)
 			if (retour == numListe[i])

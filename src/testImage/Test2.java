@@ -9,7 +9,7 @@ import comparaison.equivalence.ListeEqui;
 public class Test2 {
 
 	public static void main(String[] args) {
-		DiagMainClass dmc = new DiagMainClass("12.jpg", "12a.jpg");
+		DiagMainClass dmc = new DiagMainClass("test9.jpg", "test9d.jpg");
 		/*
 		ListeEqui le = new ListeEqui();
 		
