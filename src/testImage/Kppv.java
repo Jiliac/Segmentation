@@ -42,11 +42,6 @@ public class Kppv {
 			p.setGroupe((int) groupe);
 		else
 			p.setGroupe((int) groupe + 1);
-		/*
-		 * // ON AGRANDIT LA BASE D'APPRENTISSAGE int decompte[] =
-		 * {0,0,0,0,0,0}; if(decompte[p.getnumGroupe()] < 100){
-		 * baseDApprentissage.add(p); decompte[p.getnumGroupe()]++; }
-		 */
 	}
 
 	/******************* constructeurs ************/
