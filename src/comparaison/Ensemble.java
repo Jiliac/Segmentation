@@ -63,17 +63,16 @@ public class Ensemble {
 		// il faut copier premiereEntree dans premiereCollection
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
-				premiereCollection.add(premiereEntree[x][y]);
+					premiereCollection.add(premiereEntree[x][y]);
 			}
 		}
 
-		/*
-		 * cette partie prend en entree l'ensemble des points d'une image et
-		 * forme les collections de points d'en l'ensemble
-		 */
+		// on rassemble les points frontieres entre memes regions
 		for (Point point : premiereCollection)
-			this.collectionExistance(point); // rassemblement des categories
+			this.collectionExistance(point);
 
+		// on supprime les collections "inutile", c'est-a-dire celle qui ne sont
+		// pas frontiere entre deux regions
 		ArrayList<Collection> ensembleCopie = new ArrayList<Collection>();
 		for (Collection collec : ensemble) {
 			Point pivot = collec.get(0);
@@ -82,10 +81,10 @@ public class Ensemble {
 		}
 		ensemble = ensembleCopie;
 
+		// division des collections en composantes connexes
 		for (Collection myCollec : ensemble)
-			this.composantesConnexes2(myCollec); // division des collections en
-													// composantes connexes
-
+			this.composantesConnexes2(myCollec);
+				
 		/*
 		 * on enleve les collections de rayon trop grand et les collection
 		 * d'ecart type trop grand
@@ -105,7 +104,9 @@ public class Ensemble {
 			for (Collection collec : aSupprimer)
 				newEnsemble.remove(collec);
 		}
-
+		
+		
+		// pour compter l'air d'une région
 		if (Global.compterZones) {
 			int compteur = 0;
 			for (Collection collec : newEnsemble)

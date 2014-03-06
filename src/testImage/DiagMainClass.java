@@ -42,7 +42,7 @@ public class DiagMainClass {
 				Pixel pixel = new Pixel(c);
 				analyse.kppv(pixel);
 
-				// on set la couleur
+				// on affiche le resultat de la segmentation
 				System.out.println(pixel.getnumGroupe());
 				if (pixel.getnumGroupe() > 0) {
 					Color newColor = baseDApprentissage.get(
