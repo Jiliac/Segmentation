@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import testImage.Global;
 import testImage.Kppv;
 import testImage.Pixel;
 
@@ -30,7 +31,7 @@ public class DiagHydra {
 			e.printStackTrace();
 		}
 
-		MethodeSeuil analyse = new MethodeSeuil(new ListeIntervalleTest());
+		MethodeSeuil analyse = new MethodeSeuil(Global.baseIntervalle);
 
 		Point sortieATrier[][] = new Point[img.getWidth()][img.getHeight()];
 
@@ -44,14 +45,13 @@ public class DiagHydra {
 				analyse.setGroupe(pixel);
 
 				// preparation de l'analyse
-				sortieATrier[x][y] = new Point(x, y, pixel); 
+				sortieATrier[x][y] = new Point(x, y, pixel);
 			}
 		}
 
 		// analyse
 		Ensemble ensembleAAnlyser = new Ensemble(img, sortieATrier);
 
-		
 		// ecriture en sortie
 
 		File outputfile = new File(nomFichierSortie);

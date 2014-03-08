@@ -63,7 +63,7 @@ public class Ensemble {
 		// il faut copier premiereEntree dans premiereCollection
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
-					premiereCollection.add(premiereEntree[x][y]);
+				premiereCollection.add(premiereEntree[x][y]);
 			}
 		}
 
@@ -71,7 +71,8 @@ public class Ensemble {
 		for (Point point : premiereCollection)
 			this.collectionExistance(point);
 
-		// on supprime les collections "inutile", c'est-a-dire celle qui ne sont
+		// on supprime les collections "inutile", c'est-a-dire celle qui ne
+		// sont
 		// pas frontiere entre deux regions
 		ArrayList<Collection> ensembleCopie = new ArrayList<Collection>();
 		for (Collection collec : ensemble) {
@@ -84,15 +85,15 @@ public class Ensemble {
 		// division des collections en composantes connexes
 		for (Collection myCollec : ensemble)
 			this.composantesConnexes2(myCollec);
-				
+
 		/*
 		 * on enleve les collections de rayon trop grand et les collection
 		 * d'ecart type trop grand
 		 */
-		if (Global.supprimer) {
 
-			ArrayList<Collection> aSupprimer = new ArrayList<Collection>();
-			int size = newEnsemble.size();
+		ArrayList<Collection> aSupprimer = new ArrayList<Collection>();
+		int size = newEnsemble.size();
+		if (Global.supprimer) {
 			for (int i = 0; i < size; i++) {
 				Collection collec = newEnsemble.get(i);
 				if (collec.size() < 20 || collec.getRayon() > width / 5
@@ -100,19 +101,25 @@ public class Ensemble {
 						|| collec.getEcartType() > 2)
 					aSupprimer.add(collec);
 			}
-
-			for (Collection collec : aSupprimer)
-				newEnsemble.remove(collec);
+		} else {
+			for (int i = 0; i < size; i++) {
+				Collection collec = newEnsemble.get(i);
+				if (collec.size() < 20)
+					aSupprimer.add(collec);
+			}
 		}
-		
-		
+
+		for (Collection collec : aSupprimer)
+			newEnsemble.remove(collec);
+
 		// pour compter l'air d'une région
 		if (Global.compterZones) {
 			int compteur = 0;
 			for (Collection collec : newEnsemble)
-				if (/*A DEBUGGER*/)
+				if (collec.get(0).getGrOut() == 2)
 					compteur++;
-			System.out.println("Il y a "+compteur+" zone(s) de cet intervalle");
+			System.out.println("Il y a " + compteur
+					+ " zone(s) de cet intervalle");
 		}
 
 		// on imprime en console les collections selectionnees
